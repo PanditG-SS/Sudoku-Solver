@@ -68,7 +68,8 @@ void solveSudoku(vector<vector<char>> &A) {
 
 int main()
 {
-    // 0 means unassigned cells
+    // 0 means unassigned cells 
+    // Enter your board here
     int grid[9][9] = { { 3, 0, 6, 5, 0, 8, 4, 0, 0 },
                        { 5, 2, 0, 0, 0, 0, 0, 0, 0 },
                        { 0, 8, 7, 0, 0, 0, 0, 3, 1 },
@@ -92,5 +93,4 @@ int main()
     solveSudoku(characterGrid);
  
     return 0;
-    // This is code is contributed by Pradeep Mondal P
 }
