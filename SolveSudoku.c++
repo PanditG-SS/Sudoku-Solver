@@ -3,6 +3,62 @@
 #include<vector>
 using namespace std;
 
+int checkrows(const vector<string> &A)
+{
+    
+    for(int i=0;i<9;i++)
+    {
+        map<char,int> hash;
+        for(int j=0;j<9;j++)
+        {
+            if(A[i][j]!='.'&&hash.find(A[i][j])!=hash.end())
+            return 0;
+            hash[A[i][j]]++;
+        }
+        hash.clear();
+    }
+    return 1;
+}
+
+int checkcolumns(const vector<string> &A)
+{
+    
+    for(int i=0;i<9;i++)
+    {
+        map<char,int> hash;
+        for(int j=0;j<9;j++)
+        {
+            if(A[j][i]!='.'&&hash.find(A[j][i])!=hash.end())
+            return 0;
+            hash[A[j][i]]++;
+        }
+        hash.clear();
+    }
+    return 1;
+}
+
+int checkboxes(const vector<string> &A)
+{
+    
+    for(int row=0;row<9;row+=3)
+    {
+        for(int col=0;col<9;col+=3)
+        {
+            map<char,int> hash;
+            for(int i=0;i<9;i++)
+            {
+                char t=A[3*(row/3)+i/3][3*(col/3)+i%3];
+                if(t!='.'&&hash.find(t)!=hash.end())
+                return 0;
+                hash[t]++;
+            }
+            hash.clear();
+        }
+    }
+    return 1;
+}
+
+
 bool isValidMove(vector<vector<char>> &board,int row,int col,int dig)
 {
     for(int i=0;i<9;i++)
@@ -90,7 +146,13 @@ int main()
             }
         }
     }
+    int r=checkrows(characterGrid);
+    int c=checkcolumns(characterGrid);
+    int b=checkboxes(characterGrid);
+    if(r&b&c)
     solveSudoku(characterGrid);
+    else
+    cout<<"InValid Grid";
  
     return 0;
 }
